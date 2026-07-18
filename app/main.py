@@ -7,6 +7,8 @@ from app.routes import sales
 
 from app.routes import users
 
+from app.routes import payouts
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -19,10 +21,16 @@ app.include_router(
     sales.router,
     prefix="/sales",
     tags=["Sales"]
-
+)
 
 app.include_router(
     users.router,
     prefix="/users",
     tags=["Users"]
+)
+
+app.include_router(
+    payouts.router,
+    prefix="/payouts",
+    tags=["Payouts"]
 )

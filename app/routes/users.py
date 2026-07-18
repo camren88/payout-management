@@ -6,6 +6,17 @@ from app import models, schemas
 
 router = APIRouter()
 
-@router.post("/")
-def create_user():
-    return {"message": "Coming Soon"}
+@router.post("/", response_model=schemas.UserResponse)
+def create_user(
+    user: schemas.UserCreate,
+    db: Session = Depends(get_db)
+):
+    new_user = models.User(
+        username=user.username
+    )
+
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+
+    return new_user
