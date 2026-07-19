@@ -9,6 +9,12 @@ from app.routes import users
 
 from app.routes import payouts
 
+from app.routes import withdrawals
+
+from app.routes import reconciliation
+
+from app.routes import dashboard
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -33,4 +39,22 @@ app.include_router(
     payouts.router,
     prefix="/payouts",
     tags=["Payouts"]
+)
+
+app.include_router(
+    withdrawals.router,
+    prefix="/withdrawals",
+    tags=["Withdrawals"]
+)
+
+app.include_router(
+    reconciliation.router,
+    prefix="/reconciliation",
+    tags=["Reconciliation"]
+)
+
+app.include_router(
+    dashboard.router,
+    prefix="/dashboard",
+    tags=["Dashboard"]
 )

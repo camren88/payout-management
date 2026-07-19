@@ -18,7 +18,8 @@ def create_sale(
     new_sale = models.Sale(
       user_id=sale.user_id,
       brand=sale.brand,
-      earning=sale.earning
+      earning=sale.earning,
+      status="pending"
 )
 
     db.add(new_sale)
@@ -26,3 +27,19 @@ def create_sale(
     db.refresh(new_sale)
 
     return new_sale
+
+@router.get("/")
+def get_sales(db: Session = Depends(get_db)):
+    return db.query(models.Sale).all()
+
+
+@router.get("/{sale_id}")
+def get_sale(sale_id: int, db: Session = Depends(get_db)):
+    sale = db.query(models.Sale).filter(
+        models.Sale.id == sale_id
+    ).first()
+
+    if not sale:
+        return {"error": "Sale not found"}
+
+    return sale

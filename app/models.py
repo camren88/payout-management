@@ -21,8 +21,6 @@ class Sale(Base):
 
     user_id = Column(Integer, ForeignKey("users.id"))
 
-    brand = Column(String, nullable=False)
-
     status = Column(String, default="pending")
 
     earning = Column(Float, nullable=False)
@@ -61,6 +59,6 @@ class Withdrawal(Base):
 
     amount = Column(Float, nullable=False)
 
-    status = Column(String, default="pending")
+    status = Column(String, default="completed")
 
     user = relationship("User")    

@@ -18,11 +18,21 @@ def process_advance_payout(db: Session, sale_id: int):
     sale.advance_amount = advance_amount
     sale.advance_paid = True
 
-    user = db.query(models.User)
-
+    user = db.query(models.User).filter(models.User.id == sale.user_id).first()
+    
+    if not user:
+       return{"error": "User not found"}
+    
     user.withdrawable_balance += advance_amount
 
-    new_payout = models.Payout(...)
+    new_payout = models.Payout(
+       user_id=user.id,
+        amount=advance_amount,
+        status="completed",     
+        payout_type="advance",  
+    )
 
     db.add(new_payout)
     db.commit()
+
+    return {"message": "Advance payout processed successfully", "amount": advance_amount}

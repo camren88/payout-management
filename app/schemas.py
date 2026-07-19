@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 class UserCreate(BaseModel):
     username: str
+    email: str
 
 class UserResponse(BaseModel):
     id: int
@@ -28,3 +29,7 @@ class SaleResponse(BaseModel):
 
     class Config:
         from_attributes = True    
+
+class WithdrawalCreate(BaseModel):
+    user_id: int
+    amount: float        

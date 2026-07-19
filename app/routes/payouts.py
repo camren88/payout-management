@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
+from app import models
+
 from app.database import get_db
 from app.services.payout_service import process_advance_payout
 
@@ -13,10 +15,6 @@ def advance_payout(
 ):
     return process_advance_payout(db, sale_id)
 
-    new_payout = models.Payout(
-        user_id=user.id,
-        sale_id=sale.id,
-        payout_type="advance",
-        amount=advance_amount,
-        status="completed"
-    )
+@router.get("/")
+def get_payouts(db: Session = Depends(get_db)):
+    return db.query(models.Payout).all()
