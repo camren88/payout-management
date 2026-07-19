@@ -30,10 +30,6 @@ payout-management/
 ├── README.md
 └── .gitignore
 
-Here is the completely updated and corrected `README.md`. I have updated the folder structure, database columns, API endpoints, and author information so it perfectly matches the code we built to pass the assignment.
-
-You can copy and paste this directly into your repository.
-
 ---
 
 ```markdown
