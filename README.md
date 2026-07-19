@@ -161,7 +161,7 @@ If a withdrawal fails or gets cancelled:
 ### 1. Clone Repository
 
 ```bash
-git clone [https://github.com/](https://github.com/)<your-username>/payout-management.git
+git clone [https://github.com/](https://github.com/)/camren88/payout-management.git
 cd payout-management
 
 ```
